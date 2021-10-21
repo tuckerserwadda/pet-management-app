@@ -1,12 +1,42 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+<div v-if="loggedIn" class="container">
+<div id="nav" >
+<router-link to="/"> User DashBoard</router-link>
+</div>
+<div><div><span class="as">Logged in as:<strong id="name"> {{user}}</strong></span></div><Button id="logout" @click="logout" label="logout"/></div>
+</div>
+<div v-if="loggedIn"><DashBoard /></div>
+
   <router-view />
 </template>
+<script>
+import {authComputed} from "@/store/helpers.js"
+import DashBoard from "@/views/UserDashBoard.vue"
+export default{
+  components:{
+    DashBoard
+  },
 
-<style>
+  computed:{
+    ...authComputed,
+     user(){    
+         return this.$store.state.userName.toUpperCase()
+     }
+
+  } ,
+  methods: {
+    logout(){
+      this.$store.dispatch('logout')
+      .then(()=>{
+          
+            this.$router.push({name: 'Home'})
+        })
+    }
+  },
+}
+</script>
+
+<style scopped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -17,6 +47,7 @@
 
 #nav {
   padding: 30px;
+  
 }
 
 #nav a {
@@ -26,5 +57,16 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+#logout{
+  margin: 20px;
+}
+.container{
+  display:flex;
+  flex-direction:raw;
+  justify-content:space-between;
+}
+#name{
+  color:#eda6dd;
 }
 </style>

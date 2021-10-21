@@ -1,18 +1,19 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+
+<div v-if="!loggedIn"><Login/></div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import Login from "@/views/Login.vue";
+import {authComputed} from "@/store/helpers.js"
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    Login,
   },
+    computed:{
+    ...authComputed
+  } 
 };
 </script>
