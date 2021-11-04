@@ -1,6 +1,7 @@
 <template>
 
 <div v-if="!loggedIn"><Login/></div>
+
 </template>
 
 <script>

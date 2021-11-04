@@ -1,8 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import DashBoard from "../views/UserDashBoard.vue";
-// import SignUP from "../views/UserDashBoard.vue";
 import Login from "../views/Login.vue";
+import RegisterPet from "../views/RegisterPet.vue";
+import Pets from "../views/Pets.vue";
+import Appointments from "../views/Appointments.vue";
+import NewAppointment from "../views/NewAppointment.vue";
+import UserProfile from "@/components/UserProfile.vue";
 
 const routes = [
   {
@@ -21,11 +25,36 @@ const routes = [
     name: "Login",
     component:Login,
   },
-  // {
-  //   path: "/signUp",
-  //   name: "SignUp",
-  //   component:SignUp,
-  // },
+  {
+    path: "/profile",
+    name: "UserProfile",
+    component:UserProfile,
+    meta:{requiresAuth:true}
+  },
+  {
+    path: "/pet/register",
+    name: "RegisterPet",
+    component:RegisterPet,
+    meta:{requiresAuth:true}
+  },
+  {
+    path: "/pet",
+    name: "Pets",
+    component:Pets,
+    meta:{requiresAuth:true}
+  },
+  {
+    path: "/appointments",
+    name: "Appointments",
+    component:Appointments,
+    meta:{requiresAuth:true}
+  },
+  {
+    path: "/appointments/new",
+    name: "NewAppointment",
+    component:NewAppointment,
+    meta:{requiresAuth:true}
+  },
 
 ];
 

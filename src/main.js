@@ -12,6 +12,8 @@ import Password from "primevue/password"
 import Dialog from 'primevue/dialog';
 import PrimeVue from 'primevue/config';
 import Toaster from '@meforma/vue-toaster';
+import Card from 'primevue/card'
+import Menubar from 'primevue/menubar';
 
 createApp(App)
 .use(store)
@@ -22,4 +24,6 @@ createApp(App)
 .component("Button", Button)
 .component("Password", Password)
 .component('Dialog', Dialog)
+.component('Card', Card)
+.component('Menubar', Menubar)
 .mount("#app");

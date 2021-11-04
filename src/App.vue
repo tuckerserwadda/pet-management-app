@@ -1,20 +1,41 @@
 <template>
 <div v-if="loggedIn" class="container">
-<div id="nav" >
-<router-link to="/"> User DashBoard</router-link>
+<div class="pi pi-home" ><router-link  to="/">Home </router-link></div>
+<div><div id='profile'><span class="as" @click="getProfile">Logged in as:<strong id="name"> {{user}}</strong></span></div><Button id="logout" @click="logout" label="logout"/></div>
 </div>
-<div><div><span class="as">Logged in as:<strong id="name"> {{user}}</strong></span></div><Button id="logout" @click="logout" label="logout"/></div>
+<div v-if="showProfile" class="display-profile">
+ <Dialog 
+ class="p-fluid"
+ position="topright"
+  v-model:visible="profileDialog" 
+ :style="{width: '450px', backgroundColor:'#e2daf2'}" 
+ header="User Profile">
+ <UserProfile/>
+ <template #footer>
+                <Button label="Edit" icon="pi pi-pencil" class="p-button-text"/>
+</template>
+  
+</Dialog> 
+
 </div>
 <div v-if="loggedIn"><DashBoard /></div>
-
-  <router-view />
+<Home/>
 </template>
 <script>
 import {authComputed} from "@/store/helpers.js"
 import DashBoard from "@/views/UserDashBoard.vue"
+import Home from "@/views/Home.vue"
+import UserProfile from "@/components/UserProfile"
 export default{
+  data(){
+    return{
+      profileDialog:false,
+      showProfile:false
+    }
+
+  },
   components:{
-    DashBoard
+    DashBoard, Home, UserProfile
   },
 
   computed:{
@@ -30,7 +51,12 @@ export default{
       .then(()=>{
           
             this.$router.push({name: 'Home'})
+            this.$router.go()
         })
+    },
+    getProfile(){
+     this.profileDialog= true
+     this.showProfile= true
     }
   },
 }
@@ -69,4 +95,12 @@ export default{
 #name{
   color:#eda6dd;
 }
+#name:hover{
+  color:#6230c7;
+  cursor:pointer;
+}
+.display-profile{
+  background:#c1b4db;
+}
+
 </style>

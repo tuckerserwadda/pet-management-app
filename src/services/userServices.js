@@ -9,9 +9,10 @@ const apiClient = axios.create({
     withCredentials: false,
     headers:{
         Accept:"application/json",
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
     }
 })
+apiClient['Authorization'] = axios.defaults.headers.common['Authorization']
 export default{
     // login end point
     login(credentials){
@@ -20,5 +21,9 @@ export default{
     // create account
     signUp(account){
         return apiClient.post("/users", account)
+    },
+    // get user profile
+    getUser(userName){
+        return apiClient.get("/users/" + userName)
     }
 }

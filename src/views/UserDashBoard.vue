@@ -1,11 +1,17 @@
 <template>
-    <div>
-    <h2>  the user dash board </h2>    
+    <div class="dashboard-container">
+    <h2>  the user Dashboard </h2> 
+    <div id="dashboard-nav"><Menu/></div>  
+    <router-view/> 
     </div>
 </template>
     <script>
-    export default{
-         name:'DashBoard',
- 
-    }
+ import Menu from "@/components/Menu.vue"
+export default {
+  name: "UserDashBoard",
+  components:{
+      Menu
+  }
+};
+  
     </script>

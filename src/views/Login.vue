@@ -106,6 +106,7 @@ methods: {
         },
         createAccount(){
           this.submitted= true;
+          this.account.role = "user"
           if(this.account.password == this.confirmPassword){
             userServices.signUp(this.account)
             this.$toast.success("Account sucessfully created");
